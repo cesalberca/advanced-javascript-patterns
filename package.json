@@ -1,0 +1,39 @@
+{
+  "name": "advanced-javascript-patterns",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://www.github.com/cesalberca/advanced-javascript-patterns.git",
+  "author": "César Alberca",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "prettier --config ./prettier.config.js --loglevel error --write \"{src,__{tests,mocks}__}/**/*.js\"",
+    "build": "babel src -d dist"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.2.3",
+    "@babel/core": "7.2.2",
+    "@babel/plugin-transform-modules-commonjs": "7.2.0",
+    "@babel/polyfill": "7.2.5",
+    "@babel/preset-env": "7.2.3",
+    "@types/jest": "23.3.12",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "23.6.0",
+    "eslint": "5.12.0",
+    "eslint-config-prettier": "3.4.0",
+    "eslint-plugin-jest": "22.1.3",
+    "eslint-plugin-prettier": "3.0.1",
+    "husky": "1.3.1",
+    "jest": "23.6.0",
+    "prettier": "1.15.3",
+    "pretty-quick": "1.8.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "prettier --list-different --config ./prettier.config.js \"{src,__{tests,mocks}__}/**/*.js\" && yarn test",
+      "post-commit": "git update-index -g"
+    }
+  }
+}
