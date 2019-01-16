@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Monitor" type="NodeJSConfigurationType" path-to-node="$USER_HOME$/.nvm/versions/node/v10.15.0/bin/node" path-to-js-file="dist/proxies/monitor.js" working-dir="$PROJECT_DIR$">
+    <method v="2" />
+  </configuration>
+</component>
