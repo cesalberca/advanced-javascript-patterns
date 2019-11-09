@@ -75,7 +75,7 @@ describe('observable', () => {
 
   test('funciona con objetos anidados', async () => {
     expect.assertions(1)
-    const person = createObservable({ name: 'César', company: { name: 'Autentia', people: 70 } })
+    const person = createObservable({ name: 'César', company: { name: 'Autentia', people: 90 } })
     const stub = jest.fn(() => person.company.people)
 
     observe(stub)
@@ -84,6 +84,5 @@ describe('observable', () => {
 
     await flushPromises()
     expect(stub).toHaveBeenCalled()
-    // empleo@autentia.com
   })
 })

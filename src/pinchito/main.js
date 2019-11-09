@@ -8,18 +8,15 @@ export class Component {
 }
 
 export function mount(component, container) {
-  const diffDom = new diffDOM()
-  renderTree(diffDom, component, container)
+  renderTree(component, container)
 
   observe(() => {
-    renderTree(diffDom, component, container)
+    renderTree(component, container)
   })
 }
 
-function renderTree(differ, component, container) {
-  const element = document.createElement('body')
-  element.innerHTML = component.render()
-  differ.apply(container, differ.diff(container, element))
+function renderTree(component, container) {
+  container.innerHTML = component.render()
 }
 
 export { html }
