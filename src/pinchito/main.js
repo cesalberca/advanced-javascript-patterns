@@ -3,20 +3,18 @@ import { createObservable, observe } from '../observable/observable.js'
 
 export class Component {
   constructor() {
-    this.data = createObservable(this)
+    const observable = createObservable(this)
+    observe(() => renderTree(this))
+    this.data = observable
   }
 }
 
-export function mount(component, container) {
-  renderTree(component, container)
-
-  observe(() => {
-    renderTree(component, container)
-  })
+function renderTree(component) {
+  document.body.innerHTML = component.render()
 }
 
-function renderTree(component, container) {
-  container.innerHTML = component.render()
+export function mount(component) {
+  renderTree(component)
 }
 
 export { html }

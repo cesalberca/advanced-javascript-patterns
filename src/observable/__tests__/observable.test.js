@@ -8,7 +8,7 @@ describe('observable', () => {
 
     const stub = jest.fn()
 
-    observe(person, stub)
+    observe(stub)
 
     person.name = 'Sara'
 
@@ -22,7 +22,7 @@ describe('observable', () => {
 
     const stub = jest.fn()
 
-    observe(person, stub)
+    observe(stub)
 
     person.name = 'Autumn'
 
@@ -37,8 +37,8 @@ describe('observable', () => {
     const stub1 = jest.fn()
     const stub2 = jest.fn()
 
-    observe(person, stub1)
-    observe(person, stub2)
+    observe(stub1)
+    observe(stub2)
 
     person.name = 'Laura'
 
@@ -52,7 +52,7 @@ describe('observable', () => {
     const jobs = createObservable(['developer', 'designer'])
     const stub = jest.fn()
 
-    observe(jobs, stub)
+    observe(stub)
 
     jobs.push('ninja')
 
@@ -65,42 +65,11 @@ describe('observable', () => {
     const jobs = createObservable(['developer', 'designer'])
     const stub = jest.fn()
 
-    observe(jobs, stub)
+    observe(stub)
 
     jobs[0] = 'ninja'
 
     await flushPromises()
     expect(stub).toHaveBeenCalled()
-  })
-
-  test('funciona con objetos anidados', async () => {
-    expect.assertions(1)
-    const person = createObservable({ name: 'César', company: { name: 'Autentia', people: 90 } })
-    const stub = jest.fn(() => person.company.people)
-
-    observe(person, stub)
-
-    person.company.people++
-
-    await flushPromises()
-    expect(stub).toHaveBeenCalled()
-  })
-
-  test('no se ejecutan observadores que no tengan relación', async () => {
-    expect.assertions(2)
-    const person = createObservable({ name: 'Marta' })
-    const person2 = createObservable({ name: 'Clark' })
-
-    const stub1 = jest.fn()
-    const stub2 = jest.fn()
-
-    observe(person, stub1)
-    observe(person2, stub2)
-
-    person.name = 'Laura'
-
-    await flushPromises()
-    expect(stub1).toHaveBeenCalled()
-    expect(stub2).not.toHaveBeenCalled()
   })
 })
