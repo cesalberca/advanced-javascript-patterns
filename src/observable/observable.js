@@ -7,7 +7,7 @@ export function observe(fn) {
 export function createObservable(observable) {
   return new Proxy(observable, {
     set() {
-      observers.forEach(value => value())
+      observers.forEach(observer => observer())
       return Reflect.set(...arguments)
     }
   })
