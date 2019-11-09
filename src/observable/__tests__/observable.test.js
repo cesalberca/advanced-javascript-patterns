@@ -6,9 +6,9 @@ describe('observable', () => {
     expect.assertions(1)
     const person = createObservable({ name: 'John' })
 
-    const stub = jest.fn(() => person.name)
+    const stub = jest.fn()
 
-    observe(stub)
+    observe(person, stub)
 
     person.name = 'Sara'
 
@@ -20,9 +20,9 @@ describe('observable', () => {
     expect.assertions(1)
     const person = createObservable({ name: 'Summer' })
 
-    const stub = jest.fn(() => person.name)
+    const stub = jest.fn()
 
-    observe(stub)
+    observe(person, stub)
 
     person.name = 'Autumn'
 
@@ -34,11 +34,11 @@ describe('observable', () => {
     expect.assertions(2)
     const person = createObservable({ name: 'Marta' })
 
-    const stub1 = jest.fn(() => person.name)
-    const stub2 = jest.fn(() => person.name)
+    const stub1 = jest.fn()
+    const stub2 = jest.fn()
 
-    observe(stub1)
-    observe(stub2)
+    observe(person, stub1)
+    observe(person, stub2)
 
     person.name = 'Laura'
 
@@ -49,12 +49,12 @@ describe('observable', () => {
 
   test('funciona cuando añadimos un elemento en un array', async () => {
     expect.assertions(1)
-    const person = createObservable({ jobs: ['developer', 'designer'] })
-    const stub = jest.fn(() => person.jobs)
+    const jobs = createObservable(['developer', 'designer'])
+    const stub = jest.fn()
 
-    observe(stub)
+    observe(jobs, stub)
 
-    person.jobs.push('ninja')
+    jobs.push('ninja')
 
     await flushPromises()
     expect(stub).toHaveBeenCalled()
@@ -62,12 +62,12 @@ describe('observable', () => {
 
   test('funciona cuando sobreescribimos un elemento en un array', async () => {
     expect.assertions(1)
-    const person = createObservable({ jobs: ['developer', 'designer'] })
-    const stub = jest.fn(() => person.jobs)
+    const jobs = createObservable(['developer', 'designer'])
+    const stub = jest.fn()
 
-    observe(stub)
+    observe(jobs, stub)
 
-    person.jobs[0] = 'ninja'
+    jobs[0] = 'ninja'
 
     await flushPromises()
     expect(stub).toHaveBeenCalled()
@@ -78,7 +78,7 @@ describe('observable', () => {
     const person = createObservable({ name: 'César', company: { name: 'Autentia', people: 90 } })
     const stub = jest.fn(() => person.company.people)
 
-    observe(stub)
+    observe(person, stub)
 
     person.company.people++
 
@@ -91,11 +91,11 @@ describe('observable', () => {
     const person = createObservable({ name: 'Marta' })
     const person2 = createObservable({ name: 'Clark' })
 
-    const stub1 = jest.fn(() => person.name)
-    const stub2 = jest.fn(() => person2.name)
+    const stub1 = jest.fn()
+    const stub2 = jest.fn()
 
-    observe(stub1)
-    observe(stub2)
+    observe(person, stub1)
+    observe(person2, stub2)
 
     person.name = 'Laura'
 
