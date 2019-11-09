@@ -85,4 +85,22 @@ describe('observable', () => {
     await flushPromises()
     expect(stub).toHaveBeenCalled()
   })
+
+  test('no se ejecutan observadores que no tengan relación', async () => {
+    expect.assertions(2)
+    const person = createObservable({ name: 'Marta' })
+    const person2 = createObservable({ name: 'Clark' })
+
+    const stub1 = jest.fn(() => person.name)
+    const stub2 = jest.fn(() => person2.name)
+
+    observe(stub1)
+    observe(stub2)
+
+    person.name = 'Laura'
+
+    await flushPromises()
+    expect(stub1).toHaveBeenCalled()
+    expect(stub2).not.toHaveBeenCalled()
+  })
 })
