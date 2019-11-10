@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PinchitoJS</title>
-</head>
-<body>
-</body>
-<script src="https://unpkg.com/diff-dom@2.4.0/diffDOM.js"></script>
-<script type="module">
-import { Component, mount, html } from './main.js'
+  <head>
+    <meta charset="UTF-8" />
+    <title>PinchitoJS</title>
+  </head>
+  <body></body>
+  <script type="module">
+    import { Component, mount, html } from './main.js'
 
-class Counter extends Component {
-  constructor() {
-    super()
-    this.data.counter = 0
-    this.startCount()
-  }
+    class Counter extends Component {
+      constructor() {
+        super()
+        this.data.counter = 0
+        this.startCount()
+      }
 
-  startCount() {
-    setInterval(() => {
-      this.data.counter++
-    }, 1000)
-  }
+      startCount() {
+        setInterval(() => {
+          this.data.counter++
+        }, 1000)
+      }
 
-  render() {
-    return html`
-      <h1>Counter: ${this.data.counter}</h1>
-      <span>This won't re-render</span>
-    `
-  }
-}
+      render() {
+        return html`
+          <h1>Counter: ${this.data.counter}</h1>
+        `
+      }
+    }
 
-mount(new Counter(), document.body)
-</script>
+    mount(new Counter())
+  </script>
 </html>

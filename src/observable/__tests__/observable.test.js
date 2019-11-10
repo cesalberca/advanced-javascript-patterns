@@ -6,7 +6,7 @@ describe('observable', () => {
     expect.assertions(1)
     const person = createObservable({ name: 'John' })
 
-    const stub = jest.fn(() => person.name)
+    const stub = jest.fn()
 
     observe(stub)
 
@@ -20,7 +20,7 @@ describe('observable', () => {
     expect.assertions(1)
     const person = createObservable({ name: 'Summer' })
 
-    const stub = jest.fn(() => person.name)
+    const stub = jest.fn()
 
     observe(stub)
 
@@ -34,8 +34,8 @@ describe('observable', () => {
     expect.assertions(2)
     const person = createObservable({ name: 'Marta' })
 
-    const stub1 = jest.fn(() => person.name)
-    const stub2 = jest.fn(() => person.name)
+    const stub1 = jest.fn()
+    const stub2 = jest.fn()
 
     observe(stub1)
     observe(stub2)
@@ -49,12 +49,12 @@ describe('observable', () => {
 
   test('funciona cuando añadimos un elemento en un array', async () => {
     expect.assertions(1)
-    const person = createObservable({ jobs: ['developer', 'designer'] })
-    const stub = jest.fn(() => person.jobs)
+    const jobs = createObservable(['developer', 'designer'])
+    const stub = jest.fn()
 
     observe(stub)
 
-    person.jobs.push('ninja')
+    jobs.push('ninja')
 
     await flushPromises()
     expect(stub).toHaveBeenCalled()
@@ -62,28 +62,14 @@ describe('observable', () => {
 
   test('funciona cuando sobreescribimos un elemento en un array', async () => {
     expect.assertions(1)
-    const person = createObservable({ jobs: ['developer', 'designer'] })
-    const stub = jest.fn(() => person.jobs)
+    const jobs = createObservable(['developer', 'designer'])
+    const stub = jest.fn()
 
     observe(stub)
 
-    person.jobs[0] = 'ninja'
+    jobs[0] = 'ninja'
 
     await flushPromises()
     expect(stub).toHaveBeenCalled()
-  })
-
-  test('funciona con objetos anidados', async () => {
-    expect.assertions(1)
-    const person = createObservable({ name: 'César', company: { name: 'Autentia', people: 70 } })
-    const stub = jest.fn(() => person.company.people)
-
-    observe(stub)
-
-    person.company.people++
-
-    await flushPromises()
-    expect(stub).toHaveBeenCalled()
-    // empleo@autentia.com
   })
 })
