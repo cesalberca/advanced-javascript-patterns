@@ -2,7 +2,8 @@
   "compilerOptions": {
     "outDir": "./dist",
     "allowJs": true,
-    "target": "esnext"
+    "target": "esnext",
+    "noImplicitAny": true
   },
   "include": ["./src/**/*"]
 }
