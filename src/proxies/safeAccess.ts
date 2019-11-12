@@ -1,6 +1,11 @@
-export function createSafe(target) {
+export function createSafe(target: object): object {
+  type Target = {
+    [key: string]: object
+    [key: number]: object
+  }
+
   const handler = {
-    get(target, name) {
+    get(target: Target, name: string | number) {
       if (hasKey(target, name)) {
         const targetElement = target[name]
 
@@ -17,7 +22,7 @@ export function createSafe(target) {
   return new Proxy(target, handler)
 }
 
-export const notDefined = new Proxy(
+export const notDefined: object = new Proxy(
   {},
   {
     get() {
@@ -26,7 +31,7 @@ export const notDefined = new Proxy(
   }
 )
 
-export const either = (value, fallback) => (value === notDefined ? fallback : value)
+export const either = <T>(value: object, fallback: T) => (value === notDefined ? fallback : value)
 
-const isObject = obj => typeof obj === 'object'
-const hasKey = (obj, key) => key in obj
+const isObject = (obj: object) => typeof obj === 'object'
+const hasKey = <T>(obj: object, key: string | number | symbol) => key in obj
