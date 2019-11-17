@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "test": "jest --coverage",
-    "lint": "prettier --config ./prettier.config.js --loglevel error --write \"{src,__{tests,mocks}__}/**/*.js\"",
+    "lint": "prettier --config ./prettier.config.js --loglevel error --write \"{src,__{tests,mocks}__}/**/*.ts\"",
     "build": "babel src -d dist",
     "compile": "tsc --pretty"
   },
