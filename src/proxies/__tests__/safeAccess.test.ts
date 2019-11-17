@@ -15,7 +15,7 @@ describe('safeAccess', () => {
   })
 
   test('no lanza excepción cuando se acceden a propiedades no existentes de un objeto', () => {
-    const safePerson = createSafe({
+    const safePerson: any = createSafe({
       name: 'César',
       company: {
         name: 'Autentia'
@@ -39,7 +39,7 @@ describe('safeAccess', () => {
   })
 
   test('no lanza excepción cuando se acceden a propiedades anidadas no existentes de un objeto', () => {
-    const safePerson = createSafe({
+    const safePerson: any = createSafe({
       name: 'César',
       company: {
         name: 'Autentia'
@@ -52,7 +52,7 @@ describe('safeAccess', () => {
   })
 
   test('puede tener valores por defecto', () => {
-    const safePerson = createSafe({
+    const safePerson: any = createSafe({
       name: 'César',
       company: {
         name: 'Autentia'

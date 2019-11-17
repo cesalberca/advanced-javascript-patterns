@@ -61,7 +61,7 @@ describe('pipe', () => {
   })
 
   test('aplica el safe correctamente', () => {
-    const person = {
+    const person: any = {
       name: 'César',
       company: {
         name: 'Autentia'
