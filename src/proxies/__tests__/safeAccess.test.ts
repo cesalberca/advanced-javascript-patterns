@@ -2,7 +2,7 @@ import { createSafe, either } from '../safeAccess'
 
 describe('safeAccess', () => {
   test('lanza una excepción cuando se acceden a propiedades no existentes de un objeto', () => {
-    const person = {
+    const person: any = {
       name: 'César',
       company: {
         name: 'Autentia'

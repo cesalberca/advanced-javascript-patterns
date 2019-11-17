@@ -17,7 +17,7 @@ import { capitalize } from '../defaultParameters/propValidator'
   }
 })()
 
-async function asyncCapitalize(string) {
+async function asyncCapitalize(string: string) {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(capitalize(string))

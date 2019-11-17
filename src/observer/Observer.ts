@@ -1,6 +1,9 @@
+import { Subject } from './Subject'
+
 export class Observer {
-  constructor(subject) {
-    this.subject = subject
+  value: number
+
+  constructor(private readonly subject: Subject) {
     this.subject.addObserver(this)
     this.value = 0
   }
@@ -9,7 +12,7 @@ export class Observer {
     return `Observer counter: ${this.value}`
   }
 
-  notify(subject) {
+  notify(subject: Subject) {
     this.value = subject.counter
   }
 }
