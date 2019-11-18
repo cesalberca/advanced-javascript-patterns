@@ -1,7 +1,12 @@
+import { Observer } from './Observer'
+
 export class Subject {
+  private _counter: number
+  private readonly observers: Observer[]
+
   constructor() {
-    this.observers = []
     this._counter = 0
+    this.observers = []
   }
 
   set counter(value) {
@@ -19,7 +24,7 @@ export class Subject {
     this.notifyObservers()
   }
 
-  addObserver(observer) {
+  addObserver(observer: Observer) {
     this.observers.push(observer)
   }
 

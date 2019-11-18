@@ -7,32 +7,34 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "parcel src/pinchito/index.html",
     "test": "jest --coverage",
-    "lint": "prettier --config ./prettier.config.js --loglevel error --write \"{src,__{tests,mocks}__}/**/*.js\"",
-    "build": "babel src -d dist"
+    "lint": "prettier --config ./prettier.config.js --loglevel error --list-different \"{src,__{tests,mocks}__}/**/*.ts\"",
+    "lint:fix": "npm run lint -- --write",
+    "build": "babel src -d dist",
+    "compile": "tsc --pretty"
   },
   "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "@babel/core": "7.2.2",
-    "@babel/plugin-transform-modules-commonjs": "7.2.0",
-    "@babel/polyfill": "7.2.5",
-    "@babel/preset-env": "7.2.3",
-    "@types/jest": "23.3.12",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "23.6.0",
-    "eslint": "5.12.0",
-    "eslint-config-prettier": "3.4.0",
-    "eslint-plugin-jest": "22.1.3",
-    "eslint-plugin-prettier": "3.0.1",
-    "husky": "1.3.1",
-    "jest": "23.6.0",
-    "prettier": "1.15.3",
-    "pretty-quick": "1.8.1"
+    "@babel/core": "7.7.2",
+    "@babel/preset-env": "7.7.1",
+    "@babel/preset-typescript": "7.7.2",
+    "@types/jest": "24.0.23",
+    "@types/node": "12.12.8",
+    "eslint": "6.6.0",
+    "eslint-config-prettier": "6.6.0",
+    "eslint-plugin-jest": "23.0.4",
+    "eslint-plugin-prettier": "3.1.1",
+    "husky": "3.1.0",
+    "jest": "24.9.0",
+    "parcel-bundler": "1.12.4",
+    "prettier": "1.19.1",
+    "pretty-quick": "2.0.1",
+    "typescript": "3.7.2"
   },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
-      "pre-push": "prettier --list-different --config ./prettier.config.js \"{src,__{tests,mocks}__}/**/*.js\" && yarn test",
+      "pre-push": "npm run lint && yarn test",
       "post-commit": "git update-index -g"
     }
   }

@@ -10,7 +10,9 @@ describe('logger', () => {
   test('hace un log cuando se ejecuta una función', () => {
     mockDate('2018-10-10T12:34:56z')
     const loggerStub = {
-      log: jest.fn()
+      log: jest.fn(),
+      time: jest.fn(),
+      timeEnd: jest.fn()
     }
 
     const functionLogger = createLogger(capitalize, loggerStub)
@@ -25,7 +27,9 @@ describe('logger', () => {
   test('hace un log cuando se accede a una propiedad de un objeto', () => {
     mockDate('2018-10-10T12:34:56z')
     const loggerStub = {
-      log: jest.fn()
+      log: jest.fn(),
+      time: jest.fn(),
+      timeEnd: jest.fn()
     }
 
     const objectLogger = createLogger({ a: 1 }, loggerStub)
@@ -38,7 +42,9 @@ describe('logger', () => {
   test('hace un log cuando se accede a un elemento de un array', () => {
     mockDate('2018-10-10T12:34:56z')
     const loggerStub = {
-      log: jest.fn()
+      log: jest.fn(),
+      time: jest.fn(),
+      timeEnd: jest.fn()
     }
 
     const arrayLogger = createLogger([1, 2], loggerStub)

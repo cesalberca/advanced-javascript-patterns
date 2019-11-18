@@ -2,8 +2,8 @@ import { Observer } from '../Observer'
 import { Subject } from '../Subject'
 
 describe('Observer', () => {
-  let subject
-  let observer
+  let subject: Subject
+  let observer: Observer
 
   beforeEach(() => {
     subject = new Subject()

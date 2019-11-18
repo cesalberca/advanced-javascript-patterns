@@ -7,9 +7,10 @@ import { mockDate } from '../../../tests/utils/mockDate'
 
 describe('pipe', () => {
   test('debería ejecutar las funciones en orden y con el valor anterior', () => {
-    const functions = [() => 1, value => value + 2]
-
-    const composedFunctions = pipe(...functions)
+    const composedFunctions = pipe(
+      () => 1,
+      (value: number) => value + 2
+    )
     const result = composedFunctions()
     expect(result).toBe(3)
   })
@@ -17,28 +18,25 @@ describe('pipe', () => {
   test('invoca primero a la primera función', () => {
     const fnMock = jest.fn()
 
-    const functions = [() => fnMock('first'), () => fnMock('second')]
-
-    const composedFunctions = pipe(...functions)
+    const composedFunctions = pipe(
+      () => fnMock('first'),
+      () => fnMock('second')
+    )
     composedFunctions()
     expect(fnMock).toHaveBeenNthCalledWith(1, 'first')
   })
 
   test('debe aplicar las funciones', () => {
-    const exclamation = string => `${string}!`
-    const dash = string =>
+    const exclamation = (string: string) => `${string}!`
+    const dash = (string: string) =>
       string
         .split(' ')
         .map(word => word.split('').join('-'))
         .join(' ')
-    const upperCase = string => string.toUpperCase()
+    const upperCase = (string: string) => string.toUpperCase()
     const string = 'fus roh dah'
 
-    const upperCasedDashedExclamation = pipe(
-      upperCase,
-      dash,
-      exclamation
-    )
+    const upperCasedDashedExclamation = pipe(upperCase, dash, exclamation)
     const result = upperCasedDashedExclamation(string)
     expect(result).toBe('F-U-S R-O-H D-A-H!')
   })
@@ -50,13 +48,11 @@ describe('pipe', () => {
     }
 
     const logger = {
-      log: jest.fn()
+      log: jest.fn(),
+      time: jest.fn(),
+      timeEnd: jest.fn()
     }
-    const safeObservableLogger = pipe(
-      value => createLogger(value, logger),
-      createObservable,
-      createSafe
-    )
+    const safeObservableLogger = pipe(value => createLogger(value, logger), createObservable, createSafe)
 
     const safeObservableLoggerObject = safeObservableLogger(person)
     safeObservableLoggerObject.name
@@ -65,17 +61,14 @@ describe('pipe', () => {
   })
 
   test('aplica el safe correctamente', () => {
-    const person = {
+    const person: any = {
       name: 'César',
       company: {
         name: 'Autentia'
       }
     }
 
-    const safeObservableLogger = pipe(
-      createObservable,
-      createSafe
-    )
+    const safeObservableLogger = pipe(createObservable, createSafe)
     const safeObservableLoggerObject = safeObservableLogger(person)
 
     expect(safeObservableLoggerObject.vehicles.tesla).toBe(notDefined)
@@ -91,10 +84,7 @@ describe('pipe', () => {
     const stub = jest.fn(() => person.twitterFollowers)
     observe(stub)
 
-    const safeObservable = pipe(
-      createSafe,
-      createObservable
-    )
+    const safeObservable = pipe(createSafe, createObservable)
     const safeObservableObject = safeObservable(person)
     safeObservableObject.twitterFollowers *= 10
     await flushPromises()
