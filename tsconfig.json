@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
+    "moduleResolution": "node",
     "outDir": "./dist",
     "allowJs": true,
     "target": "esnext",
-    "noImplicitAny": true,
-    "skipLibCheck": true
+    "noImplicitAny": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]

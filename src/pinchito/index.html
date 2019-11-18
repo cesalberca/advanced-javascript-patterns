@@ -5,29 +5,5 @@
     <title>PinchitoJS</title>
   </head>
   <body></body>
-  <script type="module">
-    import { Component, mount, html } from './main.ts'
-
-    class Counter extends Component {
-      constructor() {
-        super()
-        this.data.counter = 0
-        this.startCount()
-      }
-
-      startCount() {
-        setInterval(() => {
-          this.data.counter++
-        }, 1000)
-      }
-
-      render() {
-        return html`
-          <h1>Counter: ${this.data.counter}</h1>
-        `
-      }
-    }
-
-    mount(new Counter())
-  </script>
+  <script src="main.ts"></script>
 </html>

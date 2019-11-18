@@ -1,24 +1,23 @@
-import { tag as html } from '../taggedTemplate/taggedTemplate'
-import { createObservable, observe } from '../observable/observable'
+import { Component, mount, html } from './pinchito'
 
-export abstract class Component {
-  data: Component
-
-  protected constructor() {
-    const observable = createObservable(this)
-    observe(() => renderTree(this))
-    this.data = observable
+class Counter extends Component {
+  constructor() {
+    super()
+    this.data.counter = 0
+    this.startCount()
   }
 
-  abstract render(): string
+  startCount() {
+    setInterval(() => {
+      this.data.counter++
+    }, 1000)
+  }
+
+  render() {
+    return html`
+      <h1>Counter: ${this.data.counter}</h1>
+    `
+  }
 }
 
-function renderTree(component: Component) {
-  document.body.innerHTML = component.render()
-}
-
-export function mount(component: Component) {
-  renderTree(component)
-}
-
-export { html }
+mount(new Counter())

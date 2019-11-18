@@ -7,8 +7,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "parcel src/pinchito/index.html",
     "test": "jest --coverage",
-    "lint": "prettier --config ./prettier.config.js --loglevel error --write \"{src,__{tests,mocks}__}/**/*.ts\"",
+    "lint": "prettier --config ./prettier.config.js --loglevel error --list-different \"{src,__{tests,mocks}__}/**/*.ts\"",
+    "lint:fix": "npm run lint -- --write",
     "build": "babel src -d dist",
     "compile": "tsc --pretty"
   },
@@ -19,11 +21,12 @@
     "@types/jest": "24.0.23",
     "@types/node": "12.12.8",
     "eslint": "6.6.0",
-    "eslint-config-prettier": "6.5.0",
-    "eslint-plugin-jest": "23.0.3",
+    "eslint-config-prettier": "6.6.0",
+    "eslint-plugin-jest": "23.0.4",
     "eslint-plugin-prettier": "3.1.1",
-    "husky": "3.0.9",
+    "husky": "3.1.0",
     "jest": "24.9.0",
+    "parcel-bundler": "1.12.4",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.1",
     "typescript": "3.7.2"
@@ -31,7 +34,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
-      "pre-push": "prettier --list-different --config ./prettier.config.js \"{src,__{tests,mocks}__}/**/*.js\" && yarn test",
+      "pre-push": "npm run lint && yarn test",
       "post-commit": "git update-index -g"
     }
   }
