@@ -34,11 +34,7 @@ describe('pipe', () => {
     const upperCase = string => string.toUpperCase()
     const string = 'fus roh dah'
 
-    const upperCasedDashedExclamation = pipe(
-      upperCase,
-      dash,
-      exclamation
-    )
+    const upperCasedDashedExclamation = pipe(upperCase, dash, exclamation)
     const result = upperCasedDashedExclamation(string)
     expect(result).toBe('F-U-S R-O-H D-A-H!')
   })
@@ -52,11 +48,7 @@ describe('pipe', () => {
     const logger = {
       log: jest.fn()
     }
-    const safeObservableLogger = pipe(
-      value => createLogger(value, logger),
-      createObservable,
-      createSafe
-    )
+    const safeObservableLogger = pipe(value => createLogger(value, logger), createObservable, createSafe)
 
     const safeObservableLoggerObject = safeObservableLogger(person)
     safeObservableLoggerObject.name
@@ -72,10 +64,7 @@ describe('pipe', () => {
       }
     }
 
-    const safeObservableLogger = pipe(
-      createObservable,
-      createSafe
-    )
+    const safeObservableLogger = pipe(createObservable, createSafe)
     const safeObservableLoggerObject = safeObservableLogger(person)
 
     expect(safeObservableLoggerObject.vehicles.tesla).toBe(notDefined)
@@ -91,10 +80,7 @@ describe('pipe', () => {
     const stub = jest.fn(() => person.twitterFollowers)
     observe(stub)
 
-    const safeObservable = pipe(
-      createSafe,
-      createObservable
-    )
+    const safeObservable = pipe(createSafe, createObservable)
     const safeObservableObject = safeObservable(person)
     safeObservableObject.twitterFollowers *= 10
     await flushPromises()
