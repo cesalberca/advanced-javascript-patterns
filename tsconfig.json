@@ -4,7 +4,7 @@
     "outDir": "./dist",
     "allowJs": true,
     "target": "esnext",
-    "noImplicitAny": true
+    "strict": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]
