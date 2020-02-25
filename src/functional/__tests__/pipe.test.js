@@ -2,7 +2,6 @@ import { pipe } from '../pipe'
 import { createSafe, notDefined } from '../../proxies/safeAccess'
 import { createLogger } from '../../proxies/logger'
 import { createObservable, observe } from '../../observable/observable'
-import { flushPromises } from '../../../tests/utils/flushPromises'
 import { mockDate } from '../../../tests/utils/mockDate'
 
 describe('pipe', () => {
@@ -83,7 +82,6 @@ describe('pipe', () => {
     const safeObservable = pipe(createSafe, createObservable)
     const safeObservableObject = safeObservable(person)
     safeObservableObject.twitterFollowers *= 10
-    await flushPromises()
 
     expect(stub).toHaveBeenCalled()
     expect(safeObservableObject.twitterFollowers).toBe(1000)

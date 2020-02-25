@@ -9,6 +9,7 @@ describe('logger', () => {
 
   test('hace un log cuando se ejecuta una función', () => {
     mockDate('2018-10-10T12:34:56z')
+    // ts-mockito
     const loggerStub = {
       log: jest.fn()
     }
@@ -59,7 +60,6 @@ describe('logger', () => {
     const asyncFunctionLogger = createLogger(() => Promise.resolve(), loggerStub)
 
     await asyncFunctionLogger()
-
     expect(loggerStub.time).toHaveBeenCalledWith('2018-10-10T12:34:56.000Z [function]')
     expect(loggerStub.timeEnd).toHaveBeenCalledWith('2018-10-10T12:34:56.000Z [function]')
   })
